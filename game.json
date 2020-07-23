@@ -1,0 +1,611 @@
+{
+  players: [
+        {
+      _id: 'jaqygwRov2xRhs4Gx',
+      createdAt: 2020-07-21T16: 07: 19.707Z,
+      services: [Object
+            ],
+      username: 'b',
+      emails: [Array
+            ],
+      status: [Object
+            ],
+      approved: true,
+      lobby: true,
+      declined_proposal: '<strong>a</strong> declined the game.',
+      accepted: true,
+      unstyled_username: 'b'
+        },
+        {
+      _id: 'Q7Kk2DstfMMGadcFj',
+      createdAt: 2020-07-21T15: 11: 09.091Z,
+      services: [Object
+            ],
+      username: 'a',
+      emails: [Array
+            ],
+      status: [Object
+            ],
+      verified: true,
+      admin: true,
+      approved: true,
+      lobby: true,
+      declined_proposal: '<strong>You</strong> declined the game.',
+      accepted: true,
+      unstyled_username: 'a'
+        }
+    ],
+  cards: [
+        {
+      name: 'Vampire',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Vampire',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Vault',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Vault',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Feodum',
+      count: 8,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Feodum',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Ironmonger',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Ironmonger',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Patron',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Patron',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Village',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Village',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Ducat',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Ducat',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Duchess',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Duchess',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Page',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Page',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Raze',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Raze',
+      source: 'kingdom',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Province',
+      count: 8,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Province',
+      source: 'common',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Duchy',
+      count: 8,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Duchy',
+      source: 'common',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Estate',
+      count: 8,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Estate',
+      source: 'common',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Gold',
+      count: 30,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Gold',
+      source: 'common',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Silver',
+      count: 40,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Silver',
+      source: 'common',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Copper',
+      count: 60,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Copper',
+      source: 'common',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Curse',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Curse',
+      source: 'common',
+      supply: true,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Champion',
+      count: 5,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Champion',
+      source: 'not_supply',
+      supply: false,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Hero',
+      count: 5,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Hero',
+      source: 'not_supply',
+      supply: false,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Warrior',
+      count: 5,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Warrior',
+      source: 'not_supply',
+      supply: false,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Treasure Hunter',
+      count: 5,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Treasure Hunter',
+      source: 'not_supply',
+      supply: false,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        },
+        {
+      name: 'Bat',
+      count: 10,
+      embargos: 0,
+      top_card: [Object
+            ],
+      stack: [Array
+            ],
+      stack_name: 'Bat',
+      source: 'not_supply',
+      supply: false,
+      victory_tokens: 0,
+      debt_tokens: 0,
+      tokens: []
+        }
+    ],
+  events: [
+        {
+      name: 'Reap',
+      image: 'reap',
+      types: 'event',
+      wide: true,
+      coin_cost: 7,
+      debt_cost: 0,
+      id: '1',
+      belongs_to: []
+        }
+    ],
+  landmarks: [
+        {
+      name: 'Bandit Fort',
+      image: 'bandit_fort',
+      wide: true,
+      types: 'landmark',
+      victory_tokens: 0,
+      id: '2',
+      belongs_to: []
+        }
+    ],
+  projects: [],
+  ways: [],
+  duchess: true,
+  states: [
+        {
+      name: 'Deluded',
+      image: 'deluded',
+      wide: true,
+      types: 'state',
+      id: '307',
+      belongs_to: []
+        },
+        {
+      name: 'Deluded',
+      image: 'deluded',
+      wide: true,
+      types: 'state',
+      id: '308',
+      belongs_to: []
+        },
+        {
+      name: 'Envious',
+      image: 'envious',
+      wide: true,
+      types: 'state',
+      id: '309',
+      belongs_to: []
+        },
+        {
+      name: 'Envious',
+      image: 'envious',
+      wide: true,
+      types: 'state',
+      id: '310',
+      belongs_to: []
+        },
+        {
+      name: 'Miserable',
+      image: 'miserable',
+      wide: true,
+      types: 'state',
+      id: '311',
+      belongs_to: []
+        },
+        {
+      name: 'Miserable',
+      image: 'miserable',
+      wide: true,
+      types: 'state',
+      id: '312',
+      belongs_to: []
+        },
+        {
+      name: 'Twice Miserable',
+      image: 'twice_miserable',
+      wide: true,
+      types: 'state',
+      id: '313',
+      belongs_to: []
+        },
+        {
+      name: 'Twice Miserable',
+      image: 'twice_miserable',
+      wide: true,
+      types: 'state',
+      id: '314',
+      belongs_to: []
+        }
+    ],
+  artifacts: [],
+  trash: [],
+  hexes_deck: [
+        {
+      name: 'Bad Omens',
+      image: 'bad_omens',
+      types: 'hex',
+      wide: true,
+      id: '101',
+      belongs_to: []
+        },
+        {
+      name: 'Plague',
+      image: 'plague',
+      types: 'hex',
+      wide: true,
+      id: '110',
+      belongs_to: []
+        },
+        {
+      name: 'Poverty',
+      image: 'poverty',
+      types: 'hex',
+      wide: true,
+      id: '111',
+      belongs_to: []
+        },
+        {
+      name: 'Greed',
+      image: 'greed',
+      types: 'hex',
+      wide: true,
+      id: '106',
+      belongs_to: []
+        },
+        {
+      name: 'War',
+      image: 'war',
+      types: 'hex',
+      wide: true,
+      id: '112',
+      belongs_to: []
+        },
+        {
+      name: 'Envy',
+      image: 'envy',
+      types: 'hex',
+      wide: true,
+      id: '103',
+      belongs_to: []
+        },
+        {
+      name: 'Fear',
+      image: 'fear',
+      types: 'hex',
+      wide: true,
+      id: '105',
+      belongs_to: []
+        },
+        {
+      name: 'Famine',
+      image: 'famine',
+      types: 'hex',
+      wide: true,
+      id: '104',
+      belongs_to: []
+        },
+        {
+      name: 'Delusion',
+      image: 'delusion',
+      types: 'hex',
+      wide: true,
+      id: '102',
+      belongs_to: []
+        },
+        {
+      name: 'Locusts',
+      image: 'locusts',
+      types: 'hex',
+      wide: true,
+      id: '108',
+      belongs_to: []
+        },
+        {
+      name: 'Misery',
+      image: 'misery',
+      types: 'hex',
+      wide: true,
+      id: '109',
+      belongs_to: []
+        },
+        {
+      name: 'Haunting',
+      image: 'haunting',
+      types: 'hex',
+      wide: true,
+      id: '107',
+      belongs_to: []
+        }
+    ],
+  hexes_discard: [],
+  _id: 'e6jna3LWcFghMMf7a',
+  trade_route_tokens: 0,
+  log: [ 'Turn Order is: b, a',
+        "<strong>- b's turn 1 -</strong>"
+    ],
+  turn_number: 1,
+  extra_turns: [],
+  turn: {
+    actions: 1,
+    buys: 1,
+    coins: 0,
+    potions: 0,
+    phase: 'action',
+    contraband: [],
+    cargo_ships: [],
+    bought_cards: [],
+    bought_things: [],
+    gained_cards: [],
+    trashed_cards: [],
+    played_actions: [],
+    discard_effects: [],
+    forbidden_events: [],
+    charms: 0,
+    priests: 0,
+    schemes: 0,
+    improves: 0,
+    liveries: 0,
+    merchants: 0,
+    possessions: 0,
+    coppersmiths: 0,
+    coin_discount: 0,
+    player: {
+      _id: 'jaqygwRov2xRhs4Gx',
+      createdAt: 2020-07-21T16: 07: 19.707Z,
+      services: [Object
+            ],
+      username: 'b',
+      emails: [Array
+            ],
+      status: [Object
+            ],
+      approved: true,
+      lobby: true,
+      declined_proposal: '<strong>a</strong> declined the game.',
+      accepted: true,
+      unstyled_username: 'b'
+        }
+    }
+}

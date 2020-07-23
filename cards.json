@@ -1,0 +1,141 @@
+[
+  {
+    name: 'Ambassador',
+    image: 'ambassador',
+    types: 'action attack',
+    pile_types: 'action attack',
+    coin_cost: 3,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Ambassador',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Baron',
+    image: 'baron',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 4,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Baron',
+    capitalism: true,
+    alternate_buy: false
+  },
+  {
+    name: 'Magpie',
+    image: 'magpie',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 4,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Magpie',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Mint',
+    image: 'mint',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 5,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Mint',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Pearl Diver',
+    image: 'pearl_diver',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 2,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Pearl Diver',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Scavenger',
+    image: 'scavenger',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 4,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Scavenger',
+    capitalism: true,
+    alternate_buy: false
+  },
+  {
+    name: 'Torturer',
+    image: 'torturer',
+    types: 'action attack',
+    pile_types: 'action attack',
+    coin_cost: 5,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Torturer',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Tragic Hero',
+    image: 'tragic_hero',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 5,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Tragic Hero',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Vault',
+    image: 'vault',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 5,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Vault',
+    capitalism: true,
+    alternate_buy: false
+  },
+  {
+    name: 'Villa',
+    image: 'villa',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 4,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Villa',
+    capitalism: true,
+    alternate_buy: false
+  },
+  {
+    name: 'Triumphal Arch',
+    image: 'triumphal_arch',
+    wide: true,
+    types: 'landmark',
+    victory_tokens: 0,
+    id: '1',
+    belongs_to: []
+  },
+  {
+    name: 'Tower',
+    image: 'tower',
+    wide: true,
+    types: 'landmark',
+    victory_tokens: 0,
+    id: '2',
+    belongs_to: []
+  }
+]
+    

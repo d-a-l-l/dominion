@@ -94,8 +94,7 @@ GameCreator = class GameCreator {
     if (this.game_has_event_or_landmark(this.ways, 'Way Of The Mouse')) {
       game_attributes.way_of_the_mouse = this.find_card_between_2_and_3(cards, 'action')
     }
-    // return GameModel.insert(game_attributes)
-    return game_attributes
+    return GameModel.insert(game_attributes)
   }
 
   start_game_log() {

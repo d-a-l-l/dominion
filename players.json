@@ -1,0 +1,75 @@
+players: [
+    {
+        "_id": "Q7Kk2DstfMMGadcFj",
+        "createdAt": ISODate("2020-07-21T15:11:09.091Z"),
+        "services": {
+            "password": {
+                "bcrypt": "$2b$10$/bzUzKZ4wXzUcGZXaHZkV.OyAiDlsY6WIlTJMAZE26MGwg57EXQ/e"
+            },
+            "resume": {
+                "loginTokens": [
+                    {
+                        "when": ISODate("2020-07-21T16:04:07.129Z"),
+                        "hashedToken": "Zk833XmmpXpTKLp7Lar5GpUjOH44h1HGlMb4JfngqwM="
+                    }
+                ]
+            }
+        },
+        "username": "a",
+        "emails": [
+            {
+                "address": "dalewis@tikva.com",
+                "verified": true,
+                "approved": true
+            }
+        ],
+        "status": {
+            "online": true,
+            "lastLogin": {
+                "date": ISODate("2020-07-21T16:14:51.760Z"),
+                "ipAddr": "172.17.0.1",
+                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_16_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4207.0 Safari/537.36"
+            },
+            "idle": false
+        },
+        "verified": true,
+        "admin": true,
+        "approved": true,
+        "current_game": "e6jna3LWcFghMMf7a"
+    }
+{
+        "_id": "jaqygwRov2xRhs4Gx",
+        "createdAt": ISODate("2020-07-21T16:07:19.707Z"),
+        "services": {
+            "password": {
+                "bcrypt": "$2b$10$MxeMzvI87ZXBLV2eL6Y26OP36KZCrqdEiBOMc1ItJSZrGKlVReEq6"
+            },
+            "resume": {
+                "loginTokens": [
+                    {
+                        "when": ISODate("2020-07-21T16:07:19.724Z"),
+                        "hashedToken": "Aog0Yvshdbt4RbPNPkanSsXBUWkkQTH8YkU0/TCH7kM="
+                    }
+                ]
+            }
+        },
+        "username": "b",
+        "emails": [
+            {
+                "address": "dave@tikva.com",
+                "verified": false
+            }
+        ],
+        "status": {
+            "online": true,
+            "lastLogin": {
+                "date": ISODate("2020-07-21T16:14:49.816Z"),
+                "ipAddr": "172.17.0.1",
+                "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_16_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4207.0 Safari/537.36"
+            },
+            "idle": false
+        },
+        "approved": true,
+        "current_game": "e6jna3LWcFghMMf7a"
+    }
+]
