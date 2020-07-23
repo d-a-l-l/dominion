@@ -319,6 +319,35 @@ let ActionLock = {}
 //     })).detach()
 //   },
 
+if (!ActionLock[game_id]) {
+  ActionLock[game_id] = true
+  let current_game = g
+  if (allowed_to_play(current_game)) {
+    let current_player_cards = player_cards(current_game)
+    PlayerActionUndoer.track_action(current_game, current_player_cards)
+    let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
+    all_coin_player.play()
+  }
+  ActionLock[game_id] = false
+}
+
+// let card_name = 'Estate'
+if (!ActionLock[game_id]) {
+  ActionLock[game_id] = true
+  let current_game = g
+  if (allowed_to_play(current_game)) {
+    let current_player_cards = player_cards(current_game)
+    PlayerActionUndoer.track_action(current_game, current_player_cards)
+    let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+    card_buyer.buy()
+    if (turn_over(current_game, current_player_cards)) {
+      let turn_ender = new TurnEnder(current_game, current_player_cards)
+      turn_ender.end_turn()
+    }
+  }
+  ActionLock[game_id] = false
+}
+
 console.log(g.log)
 
 function allowed_to_play(game) {
