@@ -21,7 +21,7 @@ GameEnder = class GameEnder {
 
   update_players() {
     let player_ids = _.map(this.game.players, '_id')
-    Meteor.users.update({_id: {$in: player_ids}}, {$unset: {current_game: ''}}, {multi: true})
+    // Meteor.users.update({_id: {$in: player_ids}}, {$unset: {current_game: ''}}, {multi: true})
   }
 
   log_game() {
