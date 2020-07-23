@@ -4,9 +4,12 @@ CardBuyer = class CardBuyer {
     this.game = game
     this.player_cards = player_cards
     if (card_name) {
+      // console.log(card_name)
       this.game_card = _.find(this.game.cards, function(card) {
+        // console.log(card.name)
         return card.name === card_name
       })
+      // console.log(this.game_card)
       this.card = this.game_card.top_card
       this.card_object = ClassCreator.create(this.card.name)
       this.card_gainer = new CardGainer(this.game, this.player_cards, 'discard', card_name, true)
@@ -23,6 +26,13 @@ CardBuyer = class CardBuyer {
   }
 
   can_buy() {
+    // console.log(this.is_debt_free())
+    // console.log(this.is_purchasable())
+    // console.log(this.is_valid_buy())
+    // console.log(!this.is_contraband())
+    // console.log(!this.game.turn.mission_turn)
+    // console.log(!this.game.turn.deluded)
+    // console.log(!_.includes(_.words(this.card.types), 'action'))
     return this.is_debt_free() && this.is_purchasable() && this.is_valid_buy() && !this.is_contraband() && !this.game.turn.mission_turn && (!this.game.turn.deluded || !_.includes(_.words(this.card.types), 'action'))
   }
 
@@ -119,6 +129,11 @@ CardBuyer = class CardBuyer {
   }
 
   is_valid_buy() {
+    // console.log(this.card)
+    // console.log(this.has_remaining_stock())
+    // console.log(this.has_enough_buys())
+    // console.log(this.has_enough_money())
+    // console.log(this.valid_alternate_buy())
     return this.has_remaining_stock() && this.has_enough_buys() && (this.has_enough_money() || this.valid_alternate_buy())
   }
 
@@ -140,9 +155,8 @@ CardBuyer = class CardBuyer {
   }
 
   valid_alternate_buy() {
-    if (this.card.alternate_buy) {
-      return this.card_object.alternate_buyable(this.game, this.player_cards)
-    } 
+    // console.log(this.card_object)
+    return this.card_object.alternate_buyable(this.game, this.player_cards)
   }
 
   update_log() {

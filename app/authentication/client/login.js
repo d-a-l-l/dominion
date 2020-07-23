@@ -1,69 +1,69 @@
-import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
+// import { FlowRouter } from 'meteor/ostrio:flow-router-extra'
 
-const FORM_ERRORS = 'loginErrors'
+// const FORM_ERRORS = 'loginErrors'
 
-Template.login.onCreated(function() {
-  Session.set(FORM_ERRORS, {})
-})
+// Template.login.onCreated(function() {
+//   Session.set(FORM_ERRORS, {})
+// })
 
-Template.login.helpers({
-  errorMessages: function() {
-    return _.values(Session.get(FORM_ERRORS))
-  }
-})
+// Template.login.helpers({
+//   errorMessages: function() {
+//     return _.values(Session.get(FORM_ERRORS))
+//   }
+// })
 
-Template.login.events({
-  'submit': function(event, template) {
-    event.preventDefault()
+// Template.login.events({
+//   'submit': function(event, template) {
+//     event.preventDefault()
 
-    let [email, password] = form_fields(template)
+//     let [email, password] = form_fields(template)
 
-    if (validate_form(email, password)) {
-      login(email, password)
-    }
-  },
-  'click a': function(event) {
-    event.preventDefault()
-    FlowRouter.go(event.target.getAttribute('href'))
-  }
-})
+//     if (validate_form(email, password)) {
+//       login(email, password)
+//     }
+//   },
+//   'click a': function(event) {
+//     event.preventDefault()
+//     FlowRouter.go(event.target.getAttribute('href'))
+//   }
+// })
 
-function form_fields(template) {
-  return [
-    template.$('[name=email]').val(),
-    template.$('[name=password]').val()
-  ]
-}
+// function form_fields(template) {
+//   return [
+//     template.$('[name=email]').val(),
+//     template.$('[name=password]').val()
+//   ]
+// }
 
-function validate_form(email, password) {
-  let errors = {}
+// function validate_form(email, password) {
+//   let errors = {}
 
-  if (!email) {
-    errors.email = 'Email is required'
-  }
+//   if (!email) {
+//     errors.email = 'Email is required'
+//   }
 
-  if (!password) {
-    errors.password = 'Password is required'
-  }
+//   if (!password) {
+//     errors.password = 'Password is required'
+//   }
 
-  Session.set(FORM_ERRORS, errors)
-  return !has_errors()
-}
+//   Session.set(FORM_ERRORS, errors)
+//   return !has_errors()
+// }
 
-function login(email, password) {
-  Meteor.loginWithPassword(email, password, function(error) {
-    if (error) {
-      Session.set(FORM_ERRORS, {'none': error.reason})
-    } else {
-      FlowRouter.go('/')
-    }
-  })
-}
+// function login(email, password) {
+//   Meteor.loginWithPassword(email, password, function(error) {
+//     if (error) {
+//       Session.set(FORM_ERRORS, {'none': error.reason})
+//     } else {
+//       FlowRouter.go('/')
+//     }
+//   })
+// }
 
-function has_errors() {
-  return errors_count() !== 0
-}
+// function has_errors() {
+//   return errors_count() !== 0
+// }
 
-function errors_count() {
-  return _.keys(Session.get(FORM_ERRORS)).length
-}
+// function errors_count() {
+//   return _.keys(Session.get(FORM_ERRORS)).length
+// }

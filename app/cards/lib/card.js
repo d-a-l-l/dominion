@@ -14,6 +14,18 @@ Card = class Card {
     return current_types
   }
 
+  alternate_buyable(game, player_cards) {
+    return false
+  }
+
+  types() {
+    return []
+  }
+
+  coin_cost() {
+    return 0
+  }
+
   capitalism() {
     return false
   }

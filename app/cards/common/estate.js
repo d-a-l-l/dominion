@@ -1,5 +1,14 @@
 Estate = class Estate extends Card {
 
+  // constructor(game) {
+  //   super(game)
+  //   console.log("--card constructor--")
+  //   console.log(this.constructor.name)
+  //   console.log(this.alternate_buy())
+  //   // throw error
+  //   // console.log(this.to_h())
+  // }
+
   types() {
     let card_types = ['victory']
     if (this.game) {

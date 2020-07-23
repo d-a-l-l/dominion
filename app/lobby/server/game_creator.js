@@ -32,14 +32,17 @@ GameCreator = class GameCreator {
   }
 
   create() {
-    let game_id = this.create_game()
-    this.game = GameModel.findOne(game_id)
+    // let game_id = this.create_game()
+    // this.game = GameModel.findOne(game_id)
+    let game_id = 'e6jna3LWcFghMMf7a'
+    this.game = this.create_game(game_id)
     this.format_player_usernames()
     this.create_turn()
     this.start_game_log()
     this.set_up_players()
     this.assign_game_to_players()
-    GameModel.update(this.game._id, this.game)
+    GameModel[this.game._id] = this.game
+    return this.game
   }
 
   format_player_usernames() {
@@ -52,9 +55,10 @@ GameCreator = class GameCreator {
     })
   }
 
-  create_game() {
+  create_game(game_id) {
     let cards = this.game_cards()
     let game_attributes = {
+      _id: game_id,
       players: _.shuffle(this.players),
       cards: cards,
       events: this.events,
@@ -90,14 +94,17 @@ GameCreator = class GameCreator {
     if (this.game_has_event_or_landmark(this.ways, 'Way Of The Mouse')) {
       game_attributes.way_of_the_mouse = this.find_card_between_2_and_3(cards, 'action')
     }
-    return GameModel.insert(game_attributes)
+    // return GameModel.insert(game_attributes)
+    return game_attributes
   }
 
   start_game_log() {
     let turn_order =  _.map(this.game.players, (player, index) => {
       return player.username
     })
-
+    // console.log(this.game)
+    // console.log(this.game.turn)
+    // console.log(this.game.turn.player)
     this.game.log = [
       `Turn Order is: ${turn_order.join(', ')}`,
       `<strong>- ${this.game.turn.player.username}'s turn 1 -</strong>`
@@ -110,7 +117,8 @@ GameCreator = class GameCreator {
   }
 
   set_up_players() {
-    PlayerCards[this.game._id] = new ReactiveDict()
+    // console.log(this.game)
+    PlayerCards[this.game._id] = {};//new ReactiveDict()
     _.each(this.game.players, (player, index) => {
       this.create_player_cards(player, index)
     })
@@ -155,6 +163,7 @@ GameCreator = class GameCreator {
       victory_cards = _.map(shelters, function(shelter) { return shelter.to_h() })
     } else {
       let estate = new Estate()
+      // console.log(estate.alternate_buy())
       victory_cards = _.times(3, function() { return estate.to_h() })
     }
 
@@ -210,14 +219,14 @@ GameCreator = class GameCreator {
   }
 
   assign_game_to_players() {
-    _.each(this.players, (player) => {
-      Meteor.users.update(player._id, {
-        $set: {current_game: this.game._id}
-      })
-    })
-    Streamy.sessionsForUsers(_.map(this.players, '_id')).emit('game_started', {
-      game_id: this.game._id
-    })
+    // _.each(this.players, (player) => {
+    //   Meteor.users.update(player._id, {
+    //     $set: {current_game: this.game._id}
+    //   })
+    // })
+    // Streamy.sessionsForUsers(_.map(this.players, '_id')).emit('game_started', {
+    //   game_id: this.game._id
+    // })
   }
 
   event_cards(events) {
@@ -391,10 +400,12 @@ GameCreator = class GameCreator {
 
   common_cards() {
     let cards = _.map(this.common_card_names(), function(card_name) {
-      return ClassCreator.create(card_name).to_h()
+        return ClassCreator.create(card_name).to_h()
     })
 
     return _.map(cards, (card) => {
+      // console.log("--ccc--")
+      // console.log(card)
       return this.game_card(card, 'common')
     })
   }
