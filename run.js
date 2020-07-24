@@ -275,10 +275,12 @@ let edition = []
 let game_creator = new GameCreator(players, cards, exclusions, edition)
 let g = game_creator.create()
 let game_id = g._id
+g.game_over = false
 let ActionLock = {}
-// console.log(g)
-  // playAllCoin: function(game_id) {
-      if (!ActionLock[game_id]) {
+
+while (!g.game_over) {
+  console.log(g.turn_number)
+    if (!ActionLock[game_id]) {
         ActionLock[game_id] = true
         let current_game = g
         if (allowed_to_play(current_game)) {
@@ -293,10 +295,7 @@ let ActionLock = {}
         }
         ActionLock[game_id] = false
       }
-  // }
-//   buyCard: function(card_name, game_id) {
-//     Future.task(Meteor.bindEnvironment(function() {
-  let card_name = 'Estate'
+
       if (!ActionLock[game_id]) {
         ActionLock[game_id] = true
         let current_game = g
@@ -307,8 +306,23 @@ let ActionLock = {}
           // console.log("--current_player_cards--")
           // console.log(current_player_cards)
           PlayerActionUndoer.track_action(current_game, current_player_cards)
+          let card_name = 'Estate'
           let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+          if (card_buyer.can_buy()) {
           card_buyer.buy()
+          } else {
+            card_name = 'Copper'
+            card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+            if (card_buyer.can_buy()) {
+              card_buyer.buy()
+            } else {
+              card_name = 'Curse'
+              card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+              if (card_buyer.can_buy()) {
+                card_buyer.buy()
+              }
+            }  
+          }
           if (turn_over(current_game, current_player_cards)) {
             let turn_ender = new TurnEnder(current_game, current_player_cards)
             turn_ender.end_turn()
@@ -316,37 +330,35 @@ let ActionLock = {}
         }
         ActionLock[game_id] = false
       }
-//     })).detach()
-//   },
-
-if (!ActionLock[game_id]) {
-  ActionLock[game_id] = true
-  let current_game = g
-  if (allowed_to_play(current_game)) {
-    let current_player_cards = player_cards(current_game)
-    PlayerActionUndoer.track_action(current_game, current_player_cards)
-    let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
-    all_coin_player.play()
-  }
-  ActionLock[game_id] = false
-}
-
-// let card_name = 'Estate'
-if (!ActionLock[game_id]) {
-  ActionLock[game_id] = true
-  let current_game = g
-  if (allowed_to_play(current_game)) {
-    let current_player_cards = player_cards(current_game)
-    PlayerActionUndoer.track_action(current_game, current_player_cards)
-    let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    card_buyer.buy()
-    if (turn_over(current_game, current_player_cards)) {
-      let turn_ender = new TurnEnder(current_game, current_player_cards)
-      turn_ender.end_turn()
     }
-  }
-  ActionLock[game_id] = false
-}
+
+// if (!ActionLock[game_id]) {
+//   ActionLock[game_id] = true
+//   let current_game = g
+//   if (allowed_to_play(current_game)) {
+//     let current_player_cards = player_cards(current_game)
+//     PlayerActionUndoer.track_action(current_game, current_player_cards)
+//     let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
+//     all_coin_player.play()
+//   }
+//   ActionLock[game_id] = false
+// }
+
+// if (!ActionLock[game_id]) {
+//   ActionLock[game_id] = true
+//   let current_game = g
+//   if (allowed_to_play(current_game)) {
+//     let current_player_cards = player_cards(current_game)
+//     PlayerActionUndoer.track_action(current_game, current_player_cards)
+//     let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+//     card_buyer.buy()
+//     if (turn_over(current_game, current_player_cards)) {
+//       let turn_ender = new TurnEnder(current_game, current_player_cards)
+//       turn_ender.end_turn()
+//     }
+//   }
+//   ActionLock[game_id] = false
+// }
 
 console.log(g.log)
 
