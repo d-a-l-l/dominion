@@ -1,10 +1,5 @@
 #!/usr/bin/env node
 
-// require("./app/lobby/server/game_creator.js")
-// require("./app/cards/lib/card_list.js")
-// require("./lib/class_creator.js")
-// require("./app/cards/lib/card.js")
-// require("./lib/server/models/game_model.js")
 var glob = require( 'glob' )
   , path = require( 'path' );
 
@@ -126,7 +121,42 @@ let players = [
       },
       "approved": true,
       "current_game": "e6jna3LWcFghMMf7a"
-  }
+  },
+  {
+    "_id": "caqygwRov2xRhs4Gx",
+    "createdAt": Date("2020-07-21T16:07:19.707Z"),
+    "services": {
+        "password": {
+            "bcrypt": "$2b$10$MxeMzvI87ZXBLV2eL6Y26OP36KZCrqdEiBOMc1ItJSZrGKlVReEq6"
+        },
+        "resume": {
+            "loginTokens": [
+                {
+                    "when": Date("2020-07-21T16:07:19.724Z"),
+                    "hashedToken": "Aog0Yvshdbt4RbPNPkanSsXBUWkkQTH8YkU0/TCH7kM="
+                }
+            ]
+        }
+    },
+    "username": "c",
+    "emails": [
+        {
+            "address": "dave@tikva.com",
+            "verified": false
+        }
+    ],
+    "status": {
+        "online": true,
+        "lastLogin": {
+            "date": Date("2020-07-21T16:14:49.816Z"),
+            "ipAddr": "172.17.0.1",
+            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_16_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4207.0 Safari/537.36"
+        },
+        "idle": false
+    },
+    "approved": true,
+    "current_game": "e6jna3LWcFghMMf7a"
+}
 ]
 let cards = [
       {
