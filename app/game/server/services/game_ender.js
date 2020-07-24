@@ -9,7 +9,6 @@ GameEnder = class GameEnder {
     this.update_game()
     this.update_players()
     this.log_game()
-    this.game.game_over = true
     // this.update_player_rankings()
   }
 
