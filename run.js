@@ -279,7 +279,6 @@ g.game_over = false
 let ActionLock = {}
 
 while (!g.game_over) {
-  console.log(g.turn_number)
     if (!ActionLock[game_id]) {
         ActionLock[game_id] = true
         let current_game = g
@@ -360,7 +359,7 @@ while (!g.game_over) {
 //   ActionLock[game_id] = false
 // }
 
-console.log(g.log)
+console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
 
 function allowed_to_play(game) {
   return true
