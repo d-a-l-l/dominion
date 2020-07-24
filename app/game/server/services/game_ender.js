@@ -9,7 +9,8 @@ GameEnder = class GameEnder {
     this.update_game()
     this.update_players()
     this.log_game()
-    this.update_player_rankings()
+    this.game.game_over = true
+    // this.update_player_rankings()
   }
 
   update_game() {
@@ -25,7 +26,7 @@ GameEnder = class GameEnder {
   }
 
   log_game() {
-    GameHistory.insert(_.merge(this.game, {created_at: new Date()}))
+    GameHistory.push(_.merge(this.game, {created_at: new Date()}))
   }
 
   update_player_rankings() {
