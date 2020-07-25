@@ -1,0 +1,122 @@
+[
+  {
+    name: 'Bureaucrat',
+    image: 'bureaucrat',
+    types: 'action attack',
+    pile_types: 'action attack',
+    coin_cost: 4,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Bureaucrat',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Chapel',
+    image: 'chapel',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 2,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Chapel',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Harbinger',
+    image: 'harbinger',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 3,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Harbinger',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Market',
+    image: 'market',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 5,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Market',
+    capitalism: true,
+    alternate_buy: false
+  },
+  {
+    name: 'Militia',
+    image: 'militia',
+    types: 'action attack',
+    pile_types: 'action attack',
+    coin_cost: 4,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Militia',
+    capitalism: true,
+    alternate_buy: false
+  },
+  {
+    name: 'Mine',
+    image: 'mine',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 5,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Mine',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Smithy',
+    image: 'smithy',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 4,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Smithy',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Village',
+    image: 'village',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 3,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Village',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Witch',
+    image: 'witch',
+    types: 'action attack',
+    pile_types: 'action attack',
+    coin_cost: 5,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Witch',
+    capitalism: false,
+    alternate_buy: false
+  },
+  {
+    name: 'Workshop',
+    image: 'workshop',
+    types: 'action',
+    pile_types: 'action',
+    coin_cost: 3,
+    potion_cost: 0,
+    debt_cost: 0,
+    stack_name: 'Workshop',
+    capitalism: false,
+    alternate_buy: false
+  }
+]
