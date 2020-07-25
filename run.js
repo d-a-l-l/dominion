@@ -301,13 +301,12 @@ let cards = [
 
 let exclusions = []
 let edition = []
+while (true) {
 
 let game_creator = new GameCreator(players, cards, exclusions, edition)
 let g = game_creator.create()
 let game_id = g._id
-g.game_over = false
 let ActionLock = {}
-
 while (!g.finished) {
     if (!ActionLock[game_id]) {
         ActionLock[game_id] = true
@@ -338,7 +337,7 @@ while (!g.finished) {
           let card_name = 'Estate'
           let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
           if (card_buyer.can_buy()) {
-          card_buyer.buy()
+            card_buyer.buy()
           } else {
             card_name = 'Copper'
             card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
@@ -391,9 +390,9 @@ while (!g.finished) {
 
 console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
 
-console.log(g.scores)
+// console.dir(g.scores, { depth: null })
 console.log(g.winners)
-
+  }
 
 function allowed_to_play(game) {
   return true

@@ -124,6 +124,8 @@ BuyEventProcessor = class BuyEventProcessor {
 
   process() {
     if (!_.isEmpty(this.buy_events)) {
+      // console.log("--bep.process--")
+      // console.log(this.buy_events)
       let mandatory_buy_events = _.filter(this.buy_events, (event) => {
         return _.includes(BuyEventProcessor.event_cards().concat(BuyEventProcessor.in_play_event_cards()).concat(BuyEventProcessor.overpay_cards()).concat(BuyEventProcessor.duration_attack_cards()).concat(BuyEventProcessor.landmark_cards()).concat(['Embargo', 'Charm', 'Tax']), event.name)
       })
