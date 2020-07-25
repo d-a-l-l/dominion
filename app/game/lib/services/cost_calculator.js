@@ -5,7 +5,9 @@ CostCalculator = class CostCalculator {
     let type = _.isPlainObject(card) ? card.types : card.type_class()
     let name = _.isPlainObject(card) ? card.name : card.name()
     let stack_name = _.isPlainObject(card) ? card.stack_name : card.stack_name()
-
+    // console.log(card)
+    // console.log(card.coin_cost)
+    // console.log(card.types)
     if (!player_cards) {
       player_cards = PlayerCardsModel.find(game._id)
     }
