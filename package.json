@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A website implementation of the board game Dominion, based off the former site dominion.isotropic.org.",
   "main": "mup.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "bcrypt": "^4.0.1",
