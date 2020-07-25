@@ -13,8 +13,6 @@ WORKDIR /app/src
 #CMD ["meteor", "run", "--settings=settings-dev.json"]
 #CMD ["bash"]
 RUN meteor npm install
-RUN cd node_modules/fibers && node build
-RUN cd /app/src
 ENV METEOR_ALLOW_SUPERUSER 1
 ENV IMAGE_URL /img/
 CMD ["meteor", "run"]
