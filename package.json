@@ -3,17 +3,14 @@
   "version": "1.0.0",
   "description": "A website implementation of the board game Dominion, based off the former site dominion.isotropic.org.",
   "main": "mup.js",
-  "engines": {
-    "node": ">=12.0.0"
-  },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
-    "bcrypt": "^4.0.1",
-    "bootstrap": "^4.4.1",
-    "jquery": "^3.5.0",
-    "popper": "^1.0.1",
-    "popper.js": "^1.16.1",
-    "rollbar": "^2.15.2"
+    "@babel/runtime": "*",
+    "bcrypt": "*",
+    "bootstrap": "*",
+    "jquery": "*",
+    "popper": "*",
+    "popper.js": "*",
+    "rollbar": "*"
   },
   "devDependencies": {},
   "scripts": {
