@@ -51,112 +51,20 @@ _.titleize = function(text) {
 let players = [
   {
       "_id": "Q7Kk2DstfMMGadcFj",
-      "createdAt": Date("2020-07-21T15:11:09.091Z"),
-      "services": {
-          "password": {
-              "bcrypt": "$2b$10$/bzUzKZ4wXzUcGZXaHZkV.OyAiDlsY6WIlTJMAZE26MGwg57EXQ/e"
-          },
-          "resume": {
-              "loginTokens": [
-                  {
-                      "when": Date("2020-07-21T16:04:07.129Z"),
-                      "hashedToken": "Zk833XmmpXpTKLp7Lar5GpUjOH44h1HGlMb4JfngqwM="
-                  }
-              ]
-          }
-      },
       "username": "a",
-      "emails": [
-          {
-              "address": "dalewis@tikva.com",
-              "verified": true,
-              "approved": true
-          }
-      ],
-      "status": {
-          "online": true,
-          "lastLogin": {
-              "date": Date("2020-07-21T16:14:51.760Z"),
-              "ipAddr": "172.17.0.1",
-              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_16_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4207.0 Safari/537.36"
-          },
-          "idle": false
-      },
-      "verified": true,
-      "admin": true,
-      "approved": true,
-      "current_game": "e6jna3LWcFghMMf7a"
   },
 {
       "_id": "jaqygwRov2xRhs4Gx",
-      "createdAt": Date("2020-07-21T16:07:19.707Z"),
-      "services": {
-          "password": {
-              "bcrypt": "$2b$10$MxeMzvI87ZXBLV2eL6Y26OP36KZCrqdEiBOMc1ItJSZrGKlVReEq6"
-          },
-          "resume": {
-              "loginTokens": [
-                  {
-                      "when": Date("2020-07-21T16:07:19.724Z"),
-                      "hashedToken": "Aog0Yvshdbt4RbPNPkanSsXBUWkkQTH8YkU0/TCH7kM="
-                  }
-              ]
-          }
-      },
       "username": "b",
-      "emails": [
-          {
-              "address": "dave@tikva.com",
-              "verified": false
-          }
-      ],
-      "status": {
-          "online": true,
-          "lastLogin": {
-              "date": Date("2020-07-21T16:14:49.816Z"),
-              "ipAddr": "172.17.0.1",
-              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_16_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4207.0 Safari/537.36"
-          },
-          "idle": false
-      },
-      "approved": true,
-      "current_game": "e6jna3LWcFghMMf7a"
   },
   {
     "_id": "caqygwRov2xRhs4Gx",
-    "createdAt": Date("2020-07-21T16:07:19.707Z"),
-    "services": {
-        "password": {
-            "bcrypt": "$2b$10$MxeMzvI87ZXBLV2eL6Y26OP36KZCrqdEiBOMc1ItJSZrGKlVReEq6"
-        },
-        "resume": {
-            "loginTokens": [
-                {
-                    "when": Date("2020-07-21T16:07:19.724Z"),
-                    "hashedToken": "Aog0Yvshdbt4RbPNPkanSsXBUWkkQTH8YkU0/TCH7kM="
-                }
-            ]
-        }
-    },
     "username": "c",
-    "emails": [
-        {
-            "address": "dave@tikva.com",
-            "verified": false
-        }
-    ],
-    "status": {
-        "online": true,
-        "lastLogin": {
-            "date": Date("2020-07-21T16:14:49.816Z"),
-            "ipAddr": "172.17.0.1",
-            "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_16_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4207.0 Safari/537.36"
-        },
-        "idle": false
-    },
-    "approved": true,
-    "current_game": "e6jna3LWcFghMMf7a"
-}
+  },
+  {
+    "_id": "d7Kk2DstfMMGadcFj",
+    "username": "d",
+  }
 ]
 
 let zcards = [
@@ -4602,6 +4510,26 @@ let exclusions = []
 let edition = []
 let cards = bcards
 
+let one_smithy = function(current_game) {
+
+//         let current_game = game(game_id)
+//         if (allowed_to_play(current_game)) {
+//           let current_player_cards = player_cards(current_game)
+//           PlayerActionUndoer.track_action(current_game, current_player_cards)
+//           let card = _.find(current_player_cards.hand, (card) => {
+//             return card.id === card_id
+//           })
+//           if (card) {
+//             let card_player = new CardPlayer(current_game, current_player_cards, card)
+//             card_player.play()
+//             if (turn_over(current_game, current_player_cards)) {
+//               let turn_ender = new TurnEnder(current_game, current_player_cards)
+//               turn_ender.end_turn()
+//             }
+//           }
+//         }
+}
+
 let buy_out_cards = function(current_game) {
   if (allowed_to_play(current_game)) {
     let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
@@ -4671,7 +4599,8 @@ let ActionLock = {}
 let p = {
  'a': buy_out_cards,
  'b': dumb_player,
- 'c': buy_out_cards
+ 'c': buy_out_cards,
+ 'd': dumb_player
 }
 
 
@@ -4765,10 +4694,12 @@ while (!g.finished) {
 //   ActionLock[game_id] = false
 // }
 
-console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
+// console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
 
-console.dir(g.scores, { depth: null })
-console.log(g.winners)
+// console.dir(g.scores, { depth: null })
+console.log('Winners: '+g.winners)
+g.scores.forEach(player => {console.log(player.username);console.log(player.deck_breakdown)})
+
   // }
 
 function allowed_to_play(game) {
