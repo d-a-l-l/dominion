@@ -4384,17 +4384,29 @@ let acards = [
         belongs_to: []
       }
     ]
-
+    // {
+    //   name: 'Bureaucrat',
+    //   image: 'bureaucrat',
+    //   types: 'action attack',
+    //   pile_types: 'action attack',
+    //   coin_cost: 4,
+    //   potion_cost: 0,
+    //   debt_cost: 0,
+    //   stack_name: 'Bureaucrat',
+    //   capitalism: false,
+    //   alternate_buy: false
+    // },
+  
 let bcards = [
   {
-    name: 'Bureaucrat',
-    image: 'bureaucrat',
+    name: 'Militia',
+    image: 'militia',
     types: 'action attack',
     pile_types: 'action attack',
     coin_cost: 4,
     potion_cost: 0,
     debt_cost: 0,
-    stack_name: 'Bureaucrat',
+    stack_name: 'Militia',
     capitalism: false,
     alternate_buy: false
   },
@@ -4527,193 +4539,17 @@ let cli = function(current_game) {
 
 }
 
-let big_money = function(current_game) {
-
-  // if (allowed_to_play(current_game)) {
-  //   let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
-  //   let card = _.find(current_player_cards.hand, (card) => {
-  //     // return card.id === card_id
-  //     return card.name === 'Smithy'
-  //   })
-  //   if (card) {
-  //     let card_player = new CardPlayer(current_game, current_player_cards, card)
-  //     card_player.play()
-  //     if (turn_over(current_game, current_player_cards)) {
-  //       let turn_ender = new TurnEnder(current_game, current_player_cards)
-  //       turn_ender.end_turn()
-  //     }
-  //   }
-
-  let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
-  PlayerActionUndoer.track_action(current_game, current_player_cards)
-  let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
-  all_coin_player.play()
-  let card_name = 'Province'
-  let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-  if (card_buyer.can_buy()) {
-    card_buyer.buy()
-  } else {
-    card_name = 'Gold'
-    card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    if (card_buyer.can_buy()) {
-      card_buyer.buy()
-    } else {
-      card_name = 'Silver'
-      card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-      if (card_buyer.can_buy()) {
-        card_buyer.buy()
-      } else {
-        current_game.turn.phase = 'night'
-      }
-    }
-  }
-  if (turn_over(current_game, current_player_cards)) {
-    let turn_ender = new TurnEnder(current_game, current_player_cards)
-    turn_ender.end_turn()
-  }
-}
-
-let one_smithy = function(current_game) {
-
-  if (allowed_to_play(current_game)) {
-    let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
-    let card = _.find(current_player_cards.hand, (card) => {
-      // return card.id === card_id
-      return card.name === 'Smithy'
-    })
-    if (card) {
-      // console.log(card)
-      let card_player = new CardPlayer(current_game, current_player_cards, card)
-      card_player.play()
-      if (turn_over(current_game, current_player_cards)) {
-        let turn_ender = new TurnEnder(current_game, current_player_cards)
-        turn_ender.end_turn()
-      }
-      // console.log(current_player_cards)
-    }
-
-    current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
-    PlayerActionUndoer.track_action(current_game, current_player_cards)
-    let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
-    all_coin_player.play()
-    let card_name = 'Province'
-    let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    if (card_buyer.can_buy()) {
-      card_buyer.buy()
-    } else {
-      card_name = 'Gold'
-      card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-      if (card_buyer.can_buy()) {
-        card_buyer.buy()
-      } else {
-          card_name = 'Smithy'
-        card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-        let smithies = 0
-        let total_cards = 0
-        current_game.ordered_player_cards.forEach((player) => {
-          if (player.player_id == current_game.turn.player._id) {
-            player.deck.forEach((card) => {
-              total_cards++
-              if (card.name === 'Smithy') {
-                smithies++
-              }
-            })
-          }
-        })
-        if (smithies/total_cards < 0.05 && card_buyer.can_buy()) {
-          card_buyer.buy()
-        } else {
-          card_name = 'Duchy'
-          card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-          if (card_buyer.can_buy()) {
-            card_buyer.buy()
-          } else {
-            card_name = 'Silver'
-          card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-          if (card_buyer.can_buy()) {
-            card_buyer.buy()
-          } else {
-            current_game.turn.phase = 'night'
-          }
-        }}
-      }  
-    }
-    if (turn_over(current_game, current_player_cards)) {
-      let turn_ender = new TurnEnder(current_game, current_player_cards)
-      turn_ender.end_turn()
-    }
-  }
-}
-
-let buy_out_cards = function(current_game) {
-  if (allowed_to_play(current_game)) {
-    let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
-    PlayerActionUndoer.track_action(current_game, current_player_cards)
-    let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
-    all_coin_player.play()
-    let card_name = 'Estate'
-    let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    if (card_buyer.can_buy()) {
-      card_buyer.buy()
-    } else {
-      card_name = 'Copper'
-      card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-      if (card_buyer.can_buy()) {
-        card_buyer.buy()
-      } else {
-        card_name = 'Curse'
-        card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-        if (card_buyer.can_buy()) {
-          card_buyer.buy()
-        }
-      }  
-    }
-    if (turn_over(current_game, current_player_cards)) {
-      let turn_ender = new TurnEnder(current_game, current_player_cards)
-      turn_ender.end_turn()
-    }
-  }
-}
-
-let dumb_player = function(current_game) {
-  if (allowed_to_play(current_game)) {
-    let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
-    PlayerActionUndoer.track_action(current_game, current_player_cards)
-    let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
-    all_coin_player.play()
-    let card_name = 'Curse'
-    let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    if (card_buyer.can_buy()) {
-      card_buyer.buy()
-    } else {
-      card_name = 'Copper'
-      card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-      if (card_buyer.can_buy()) {
-        card_buyer.buy()
-      } else {
-        card_name = 'Estate'
-        card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-        if (card_buyer.can_buy()) {
-          card_buyer.buy()
-        }
-      }  
-    }
-    if (turn_over(current_game, current_player_cards)) {
-      let turn_ender = new TurnEnder(current_game, current_player_cards)
-      turn_ender.end_turn()
-    }
-  }
-}
-
 // let gz = 0
 let bigmoneyagent1 = new BigMoney
 let bigmoneyagent2 = new BigMoney
-let bigmoneyagent3 = new BigMoney
+let dumbplayeragent = new DumbPlayer
+let buyoutcardsagent = new BuyOutCards
+let militiasagent = new Militias
 let smithiesagent = new Smithies
 let p = {
-  'a': bigmoneyagent1.p,
-  'b': bigmoneyagent2.p,
-  'c': bigmoneyagent3.p,
+  'a': dumbplayeragent.p,
+  'b': buyoutcardsagent.p,
+  'c': bigmoneyagent1.p,
   'd': smithiesagent.p
  }
 //    'a': 0,
@@ -4725,14 +4561,13 @@ let p = {
 let wz = pg(players, cards, exclusions, edition, p)
 
 wz.then((wiz) => {
-  console.log("wz3")
   console.log(wiz)
 })
 
 async function pg(players, cards, exclusions, edition, p) {
   let gz = 0
   let wz = {}
-  while (gz < 1000){
+  while (gz < 100){
   let game_creator = new GameCreator(players, cards, exclusions, edition)
   let g = game_creator.create()
   let game_id = g._id
@@ -4743,7 +4578,7 @@ async function pg(players, cards, exclusions, edition, p) {
     return player.username
   })
   console.log(`Turn Order is: ${turn_order.join(', ')}`,)
-  
+
 
   let winners = await pg2(g, p, gz)
   // console.log("wz1")
@@ -4754,8 +4589,6 @@ async function pg(players, cards, exclusions, edition, p) {
     } else {
       wz[winners] = 1
     }
-    console.log("wz2")
-    console.log(wz)
     gz++
   // })
 }
@@ -4763,7 +4596,6 @@ return wz
 }
 
 async function pg2(g, p, gz) {
-  console.log("Start game "+gz)
   while (!g.finished) {
     p[g.turn.player.unstyled_username](g)
  // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
@@ -4772,7 +4604,6 @@ async function pg2(g, p, gz) {
  // console.log('Winners: '+g.winners)
  // g.scores.forEach(player => {console.log(player.username+" "+player.points);console.log(player.deck_breakdown)})
  }
- console.log("End game "+gz)
  return g.winners
 }
 
