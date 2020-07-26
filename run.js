@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
+
 var glob = require( 'glob' )
   , path = require( 'path' );
+const { exit } = require('process');
 
 glob.sync( './app/cards/lib/*.js' ).forEach( function( file ) {
 require( path.resolve( file ) );
@@ -4510,24 +4512,137 @@ let exclusions = []
 let edition = []
 let cards = bcards
 
+let cli = function(current_game) {
+//   "click #hand .card-image": playCard,
+//   "click .card-container .card-image": buyCard,
+//   "click .event-container .card-image": buyEvent,
+//   "click .project-container .card-image": buyProject,
+//   "click #undo-action": undoAction,
+//   "click #end-turn": endTurn,
+//   "click #play-all-coin": playAllCoin,
+//   "click #play-coffer": playCoinToken,
+//   "click #play-villager": playVillager,
+//   "click #play-debt-token": playDebtToken,
+//   "submit #turn-event": turnEvent
+
+}
+
+let big_money = function(current_game) {
+
+  // if (allowed_to_play(current_game)) {
+  //   let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
+  //   let card = _.find(current_player_cards.hand, (card) => {
+  //     // return card.id === card_id
+  //     return card.name === 'Smithy'
+  //   })
+  //   if (card) {
+  //     let card_player = new CardPlayer(current_game, current_player_cards, card)
+  //     card_player.play()
+  //     if (turn_over(current_game, current_player_cards)) {
+  //       let turn_ender = new TurnEnder(current_game, current_player_cards)
+  //       turn_ender.end_turn()
+  //     }
+  //   }
+
+  let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
+  PlayerActionUndoer.track_action(current_game, current_player_cards)
+  let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
+  all_coin_player.play()
+  let card_name = 'Province'
+  let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+  if (card_buyer.can_buy()) {
+    card_buyer.buy()
+  } else {
+    card_name = 'Gold'
+    card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+    if (card_buyer.can_buy()) {
+      card_buyer.buy()
+    } else {
+      card_name = 'Silver'
+      card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+      if (card_buyer.can_buy()) {
+        card_buyer.buy()
+      } else {
+        current_game.turn.phase = 'night'
+      }
+    }
+  }
+  if (turn_over(current_game, current_player_cards)) {
+    let turn_ender = new TurnEnder(current_game, current_player_cards)
+    turn_ender.end_turn()
+  }
+}
+
 let one_smithy = function(current_game) {
 
-//         let current_game = game(game_id)
-//         if (allowed_to_play(current_game)) {
-//           let current_player_cards = player_cards(current_game)
-//           PlayerActionUndoer.track_action(current_game, current_player_cards)
-//           let card = _.find(current_player_cards.hand, (card) => {
-//             return card.id === card_id
-//           })
-//           if (card) {
-//             let card_player = new CardPlayer(current_game, current_player_cards, card)
-//             card_player.play()
-//             if (turn_over(current_game, current_player_cards)) {
-//               let turn_ender = new TurnEnder(current_game, current_player_cards)
-//               turn_ender.end_turn()
-//             }
-//           }
-//         }
+  if (allowed_to_play(current_game)) {
+    let current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
+    let card = _.find(current_player_cards.hand, (card) => {
+      // return card.id === card_id
+      return card.name === 'Smithy'
+    })
+    if (card) {
+      // console.log(card)
+      let card_player = new CardPlayer(current_game, current_player_cards, card)
+      card_player.play()
+      if (turn_over(current_game, current_player_cards)) {
+        let turn_ender = new TurnEnder(current_game, current_player_cards)
+        turn_ender.end_turn()
+      }
+      // console.log(current_player_cards)
+    }
+
+    current_player_cards = my_cards(current_game._id, current_game.turn.player._id)
+    PlayerActionUndoer.track_action(current_game, current_player_cards)
+    let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
+    all_coin_player.play()
+    let card_name = 'Province'
+    let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+    if (card_buyer.can_buy()) {
+      card_buyer.buy()
+    } else {
+      card_name = 'Gold'
+      card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+      if (card_buyer.can_buy()) {
+        card_buyer.buy()
+      } else {
+          card_name = 'Smithy'
+        card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+        let smithies = 0
+        let total_cards = 0
+        current_game.ordered_player_cards.forEach((player) => {
+          if (player.player_id == current_game.turn.player._id) {
+            player.deck.forEach((card) => {
+              total_cards++
+              if (card.name === 'Smithy') {
+                smithies++
+              }
+            })
+          }
+        })
+        if (smithies/total_cards < 0.05 && card_buyer.can_buy()) {
+          card_buyer.buy()
+        } else {
+          card_name = 'Duchy'
+          card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+          if (card_buyer.can_buy()) {
+            card_buyer.buy()
+          } else {
+            card_name = 'Silver'
+          card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
+          if (card_buyer.can_buy()) {
+            card_buyer.buy()
+          } else {
+            current_game.turn.phase = 'night'
+          }
+        }}
+      }  
+    }
+    if (turn_over(current_game, current_player_cards)) {
+      let turn_ender = new TurnEnder(current_game, current_player_cards)
+      turn_ender.end_turn()
+    }
+  }
 }
 
 let buy_out_cards = function(current_game) {
@@ -4590,18 +4705,26 @@ let dumb_player = function(current_game) {
   }
 }
 
-// while (true) {
+let gz = 0
+let agent = new BigMoney
+let p = {
+  'a': buy_out_cards,
+  'b': agent.p,
+  'c': big_money,
+  'd': one_smithy
+ }
+ let wz = {}
+//    'a': 0,
+//    'b': 0,
+//    'c': 0,
+//    'd': 0 
+//  }
+ while (gz < 500) {
 
 let game_creator = new GameCreator(players, cards, exclusions, edition)
 let g = game_creator.create()
 let game_id = g._id
 let ActionLock = {}
-let p = {
- 'a': buy_out_cards,
- 'b': dumb_player,
- 'c': buy_out_cards,
- 'd': dumb_player
-}
 
 
 // console.log(g)
@@ -4611,6 +4734,7 @@ let turn_order =  _.map(g.players, (player, index) => {
 console.log(`Turn Order is: ${turn_order.join(', ')}`,)
 while (!g.finished) {
   p[g.turn.player.unstyled_username](g)
+  // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
   // player_a(g)
   // player_b(g)
   // player_c(g)
@@ -4697,10 +4821,17 @@ while (!g.finished) {
 // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
 
 // console.dir(g.scores, { depth: null })
-console.log('Winners: '+g.winners)
-g.scores.forEach(player => {console.log(player.username);console.log(player.deck_breakdown)})
+// console.log('Winners: '+g.winners)
+// g.scores.forEach(player => {console.log(player.username+" "+player.points);console.log(player.deck_breakdown)})
+if (wz[g.winners]) {
+  wz[g.winners]++
+} else {
+  wz[g.winners] = 1
+}
+gz++
+  }
 
-  // }
+  console.log(wz)
 
 function allowed_to_play(game) {
   return true
