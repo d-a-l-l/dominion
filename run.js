@@ -27,28 +27,7 @@ global._ = require("lodash")
 _.titleize = function(text) {
     return _.startCase(text).replace(/ /g,'')
   }
-  
-// require("./lodash.js");
-// let player_ids = $('.lobby-player:checked').map(function() {
-//     return $(this).val()
-//   }).get()
 
-//   let exclusions = $('.card-set:checked').map(function() {
-//     return $(this).val()
-//   }).get()
-
-//   let kingdom_id = _.trim($('.kingdom-id').val())
-
-//   let edition = $('.edition:checked').val()
-
-// let card_list = new CardList(this.exclusions, this.edition)
-// if (this.kingdom_id === '') {
-//   this.cards = card_list.pull_set()
-// } else {
-//   this.cards = card_list.pull_from_history(this.kingdom_id)
-// }
-// this.cards = _.sortBy(this.cards, function(card) {
-//   return card.stack_name
 
 let players = [
   {
@@ -4520,9 +4499,36 @@ let bcards = [
   }
 ]
 
+// Hand curated json above
+// let exclusions = []
+// let edition = "2" // or "1"
+// let cards = bcards
+
+// OR pass in exclusions and editions like via web
+// 'base'+edition, 'intrigue'+edition, 
+// 'seaside', 'alchemy', 'prosperity', 'cornucopia', 
+// 'hinterlands', 'dark_ages', 'guilds', 'adventures',
+// 'empires', 'nocturne', 'renaissance', 'menagerie', 'promo'
+
+// let exclusions = ['intrigue', 'seaside', 'alchemy', 'prosperity', 'cornucopia', 'hinterlands', 'dark_ages',
+// 'guilds', 'adventures', 'empires', 'nocturne', 'renaissance', 'menagerie', 'promo']
+// let edition = "2" // or "1"
+// let card_list = new CardList(exclusions, edition)
+// let cards = card_list.pull_set()
+// cards = _.sortBy(cards, function(card) {
+//   return card.stack_name
+// })
+
+// OR pass in the list of 10 card names
 let exclusions = []
-let edition = []
-let cards = bcards
+let edition = "2" // or "1"
+let game_cards = ['Militia', 'Smithy', 'Cellar', 'Chapel', 'Moat', 'Bureaucrat', 'Vault', 'Scavenger', 'Moneylender', 'Adventurer']
+let cards = _.map(game_cards, function(card_name) {
+  return ClassCreator.create(card_name).to_h()
+})
+cards = _.sortBy(cards, function(card) {
+  return card.stack_name
+})
 
 let cli = function(current_game) {
 //   "click #hand .card-image": playCard,
@@ -4539,99 +4545,59 @@ let cli = function(current_game) {
 
 }
 
-// let gz = 0
 let bigmoneyagent1 = new BigMoney
 let bigmoneyagent2 = new BigMoney
-let dumbplayeragent = new DumbPlayer
-let buyoutcardsagent = new BuyOutCards
+// let dumbplayeragent = new DumbPlayer
+// let buyoutcardsagent = new BuyOutCards
 let militiasagent = new Militias
 let smithiesagent = new Smithies
 let p = {
-  'a': dumbplayeragent.p,
-  'b': buyoutcardsagent.p,
-  'c': bigmoneyagent1.p,
+  'a': bigmoneyagent1.p,
+  'b': bigmoneyagent2.p,
+  'c': militiasagent.p,
   'd': smithiesagent.p
- }
-//    'a': 0,
-//    'b': 0,
-//    'c': 0,
-//    'd': 0 
-//  }
-// let winnersp = pg(players, cards, exclusions, edition, p)
-let wz = pg(players, cards, exclusions, edition, p)
+}
 
-wz.then((wiz) => {
-  console.log(wiz)
+let num_games = 1
+
+let winners = play_all_games(players, cards, exclusions, edition, p, num_games)
+
+winners.then((winner) => {
+  console.log(winner)
 })
 
-async function pg(players, cards, exclusions, edition, p) {
-  let gz = 0
-  let wz = {}
-  while (gz < 100){
-  let game_creator = new GameCreator(players, cards, exclusions, edition)
-  let g = game_creator.create()
-  let game_id = g._id
-  let ActionLock = {}
-  // console.log(g)
-  
-  let turn_order =  _.map(g.players, (player, index) => {
-    return player.username
-  })
-  console.log(`Turn Order is: ${turn_order.join(', ')}`,)
+async function play_all_games(players, cards, exclusions, edition, p, num_games) {
+  let games_played = 0
+  let all_winners = {}
+  while (games_played < num_games) {
+    let game_creator = new GameCreator(players, cards, exclusions, edition)
+    let g = game_creator.create()
+    let game_id = g._id
+    
+    let turn_order =  _.map(g.players, (player, index) => {
+      return player.username
+    })
+    console.log(`Turn Order is: ${turn_order.join(', ')}`,)
 
-
-  let winners = await pg2(g, p, gz)
-  // console.log("wz1")
-  // console.log(wz)
-  // winnersp.then((winners) => {
-    if (wz[winners]) {
-      wz[winners]++
+    let winners = await play_game(g, p)
+    if (all_winners[winners]) {
+      all_winners[winners]++
     } else {
-      wz[winners] = 1
+      all_winners[winners] = 1
     }
-    gz++
-  // })
-}
-return wz
-}
-
-async function pg2(g, p, gz) {
-  while (!g.finished) {
-    p[g.turn.player.unstyled_username](g)
- // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
- 
- // console.dir(g.scores, { depth: null })
- // console.log('Winners: '+g.winners)
- // g.scores.forEach(player => {console.log(player.username+" "+player.points);console.log(player.deck_breakdown)})
- }
- return g.winners
-}
-
-function allowed_to_play(game) {
-  return true
-  // if (game.turn.possessed) {
-  //   return Meteor.userId() === game.turn.possessed._id
-  // } else {
-  //   return Meteor.userId() === game.turn.player._id
-  // }
-}
-function player_cards(game) {
-  return PlayerCardsModel.findOne(game._id, game.turn.player._id)
-}
-function my_cards(game_id, player_id) {
-  return PlayerCardsModel.findOne(game_id, player_id)
-}
-function turn_over(game, player_cards) {
-  if (game.turn.phase === 'buy') {
-    return game.turn.buys === 0 && (player_cards.debt_tokens === 0 || game.turn.coins === 0) && !has_night_cards(player_cards)
-  } else if (game.turn.phase === 'night') {
-    return !has_night_cards(player_cards)
-  } else {
-    return false
+    games_played++
   }
+  return all_winners
 }
-function has_night_cards(player_cards) {
-  return _.some(player_cards.hand, function(card) {
-    return _.includes(_.words(card.types), 'night')
-  })
+
+async function play_game(game, players) {
+  while (!game.finished) {
+    players[game.turn.player.unstyled_username](game)
+    // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
+ 
+    // console.dir(g.scores, { depth: null })
+    // console.log('Winners: '+g.winners)
+    // g.scores.forEach(player => {console.log(player.username+" "+player.points);console.log(player.deck_breakdown)})
+  }
+  return game.winners
 }
