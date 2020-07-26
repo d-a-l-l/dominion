@@ -4705,133 +4705,76 @@ let dumb_player = function(current_game) {
   }
 }
 
-let gz = 0
-let agent = new BigMoney
+// let gz = 0
+let bigmoneyagent1 = new BigMoney
+let bigmoneyagent2 = new BigMoney
+let bigmoneyagent3 = new BigMoney
+let smithiesagent = new Smithies
 let p = {
-  'a': buy_out_cards,
-  'b': agent.p,
-  'c': big_money,
-  'd': one_smithy
+  'a': bigmoneyagent1.p,
+  'b': bigmoneyagent2.p,
+  'c': bigmoneyagent3.p,
+  'd': smithiesagent.p
  }
- let wz = {}
 //    'a': 0,
 //    'b': 0,
 //    'c': 0,
 //    'd': 0 
 //  }
- while (gz < 500) {
+// let winnersp = pg(players, cards, exclusions, edition, p)
+let wz = pg(players, cards, exclusions, edition, p)
 
-let game_creator = new GameCreator(players, cards, exclusions, edition)
-let g = game_creator.create()
-let game_id = g._id
-let ActionLock = {}
-
-
-// console.log(g)
-let turn_order =  _.map(g.players, (player, index) => {
-  return player.username
+wz.then((wiz) => {
+  console.log("wz3")
+  console.log(wiz)
 })
-console.log(`Turn Order is: ${turn_order.join(', ')}`,)
-while (!g.finished) {
-  p[g.turn.player.unstyled_username](g)
-  // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
-  // player_a(g)
-  // player_b(g)
-  // player_c(g)
-    // if (!ActionLock[game_id]) {
-    //   ActionLock[game_id] = true
-    //   let current_game = g
-    //   if (allowed_to_play(current_game)) {
-    //     let current_player_cards = player_cards(current_game)
-    //     PlayerActionUndoer.track_action(current_game, current_player_cards)
-    //     // console.log("--current_game--")
-    //     // console.log(current_game)
-    //     // console.log("--current_player_cards--")
-    //     // console.log(current_player_cards)
-    //     let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
-    //     all_coin_player.play()
-    //   }
-    //   ActionLock[game_id] = false
-    // }
 
-    // if (!ActionLock[game_id]) {
-    //   ActionLock[game_id] = true
-    //   let current_game = g
-    //   if (allowed_to_play(current_game)) {
-    //     let current_player_cards = player_cards(current_game)
-    //     // console.log("--current_game--")
-    //     // console.log(current_game)
-    //     // console.log("--current_player_cards--")
-    //     // console.log(current_player_cards)
-    //     PlayerActionUndoer.track_action(current_game, current_player_cards)
-    //     let card_name = 'Estate'
-    //     let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    //     if (card_buyer.can_buy()) {
-    //       card_buyer.buy()
-    //     } else {
-    //       card_name = 'Copper'
-    //       card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    //       if (card_buyer.can_buy()) {
-    //         card_buyer.buy()
-    //       } else {
-    //         card_name = 'Curse'
-    //         card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-    //         if (card_buyer.can_buy()) {
-    //           card_buyer.buy()
-    //         }
-    //       }  
-    //     }
-    //     if (turn_over(current_game, current_player_cards)) {
-    //       let turn_ender = new TurnEnder(current_game, current_player_cards)
-    //       turn_ender.end_turn()
-    //     }
-    //   }
-    //   ActionLock[game_id] = false
-    // }
+async function pg(players, cards, exclusions, edition, p) {
+  let gz = 0
+  let wz = {}
+  while (gz < 1000){
+  let game_creator = new GameCreator(players, cards, exclusions, edition)
+  let g = game_creator.create()
+  let game_id = g._id
+  let ActionLock = {}
+  // console.log(g)
+  
+  let turn_order =  _.map(g.players, (player, index) => {
+    return player.username
+  })
+  console.log(`Turn Order is: ${turn_order.join(', ')}`,)
+  
+
+  let winners = await pg2(g, p, gz)
+  // console.log("wz1")
+  // console.log(wz)
+  // winnersp.then((winners) => {
+    if (wz[winners]) {
+      wz[winners]++
+    } else {
+      wz[winners] = 1
+    }
+    console.log("wz2")
+    console.log(wz)
+    gz++
+  // })
+}
+return wz
 }
 
-// if (!ActionLock[game_id]) {
-//   ActionLock[game_id] = true
-//   let current_game = g
-//   if (allowed_to_play(current_game)) {
-//     let current_player_cards = player_cards(current_game)
-//     PlayerActionUndoer.track_action(current_game, current_player_cards)
-//     let all_coin_player = new AllCoinPlayer(current_game, current_player_cards)
-//     all_coin_player.play()
-//   }
-//   ActionLock[game_id] = false
-// }
-
-// if (!ActionLock[game_id]) {
-//   ActionLock[game_id] = true
-//   let current_game = g
-//   if (allowed_to_play(current_game)) {
-//     let current_player_cards = player_cards(current_game)
-//     PlayerActionUndoer.track_action(current_game, current_player_cards)
-//     let card_buyer = new CardBuyer(current_game, current_player_cards, card_name)
-//     card_buyer.buy()
-//     if (turn_over(current_game, current_player_cards)) {
-//       let turn_ender = new TurnEnder(current_game, current_player_cards)
-//       turn_ender.end_turn()
-//     }
-//   }
-//   ActionLock[game_id] = false
-// }
-
-// console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
-
-// console.dir(g.scores, { depth: null })
-// console.log('Winners: '+g.winners)
-// g.scores.forEach(player => {console.log(player.username+" "+player.points);console.log(player.deck_breakdown)})
-if (wz[g.winners]) {
-  wz[g.winners]++
-} else {
-  wz[g.winners] = 1
+async function pg2(g, p, gz) {
+  console.log("Start game "+gz)
+  while (!g.finished) {
+    p[g.turn.player.unstyled_username](g)
+ // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
+ 
+ // console.dir(g.scores, { depth: null })
+ // console.log('Winners: '+g.winners)
+ // g.scores.forEach(player => {console.log(player.username+" "+player.points);console.log(player.deck_breakdown)})
+ }
+ console.log("End game "+gz)
+ return g.winners
 }
-gz++
-  }
-
-  console.log(wz)
 
 function allowed_to_play(game) {
   return true
