@@ -4545,33 +4545,34 @@ let cli = function(current_game) {
 
 }
 
-let bigmoneyagent1 = new BigMoney
-let bigmoneyagent2 = new BigMoney
-// let dumbplayeragent = new DumbPlayer
-// let buyoutcardsagent = new BuyOutCards
-let militiasagent = new Militias
-let smithiesagent = new Smithies
-let p = {
-  'a': bigmoneyagent1.p,
-  'b': bigmoneyagent2.p,
-  'c': militiasagent.p,
-  'd': smithiesagent.p
-}
 
-let num_games = 1
+let num_games = 1000
 
-let winners = play_all_games(players, cards, exclusions, edition, p, num_games)
+let winners = play_all_games(players, cards, exclusions, edition, num_games)
 
-winners.then((winner) => {
-  console.log(winner)
-})
+// winners.then((winner) => {
+  console.log(winners)
+// })
 
-async function play_all_games(players, cards, exclusions, edition, p, num_games) {
+function play_all_games(players, cards, exclusions, edition, num_games) {
   let games_played = 0
   let all_winners = {}
   while (games_played < num_games) {
     let game_creator = new GameCreator(players, cards, exclusions, edition)
     let g = game_creator.create()
+    let bigmoneyagent1 = new BigMoney(g, players[0]._id)//new BigMoney(g)
+    let bigmoneyagent2 = new BigMoney(g, players[1]._id)//new BigMoney(g)
+    // let bigmoneyagent3 = new BigMoney(g)
+    // let dumbplayeragent = new DumbPlayer(g)
+    let militiasagent = new Militias(g, players[2]._id)//new Militias(g)
+    // let buyoutcardsagent = new BuyOutCards(g, players[3]._id)
+    let smithiesagent = new Smithies(g, players[3]._id)
+    let pz = {
+      'a': bigmoneyagent1,
+      'b': bigmoneyagent2,
+      'c': militiasagent,
+      'd': smithiesagent
+    }
     let game_id = g._id
     
     let turn_order =  _.map(g.players, (player, index) => {
@@ -4579,7 +4580,7 @@ async function play_all_games(players, cards, exclusions, edition, p, num_games)
     })
     console.log(`Turn Order is: ${turn_order.join(', ')}`,)
 
-    let winners = await play_game(g, p)
+    let winners =  play_game(g, pz)
     if (all_winners[winners]) {
       all_winners[winners]++
     } else {
@@ -4590,9 +4591,9 @@ async function play_all_games(players, cards, exclusions, edition, p, num_games)
   return all_winners
 }
 
-async function play_game(game, players) {
+function play_game(game, players) {
   while (!game.finished) {
-    players[game.turn.player.unstyled_username](game)
+    players[game.turn.player.unstyled_username].p()
     // console.log(g.log.slice(Math.max(g.log.length - 5, 0)))
  
     // console.dir(g.scores, { depth: null })

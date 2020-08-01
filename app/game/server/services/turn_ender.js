@@ -1,24 +1,25 @@
 TurnEnder = class TurnEnder {
 
-  constructor(game, player_cards) {
-    this.game = game
+  constructor(turn, player_cards) {
+    this.turn = turn
+    // this.game = game
     this.player_cards = player_cards
   }
 
   end_turn() {
-    this.game.previous_state = false
-    if (this.game.turn.phase === 'action') {
+    // this.game.previous_state = false
+    if (this.turn.phase === 'action') {
       this.start_buy_events()
     }
     this.end_buy_events()
-    this.game.turn.phase = 'cleanup'
+    this.turn.phase = 'cleanup'
     this.start_cleanup_events()
     this.discard_hand()
     this.clean_up_cards_in_play()
     this.draw_new_hand()
     this.end_turn_events()
     this.track_turn_cards()
-    this.game.log.push(`<strong>${this.game.turn.player.username}</strong> ends their turn`)
+    this.game.log.push(`<strong>${this.turn.player.username}</strong> ends their turn`)
     if (!_.isEmpty(this.player_cards.inheritance)) {
       Inheritance.convert_estates(this.game, this.player_cards, false)
     }

@@ -23,8 +23,9 @@ TurnEventProcessor = class TurnEventProcessor {
     _.each(this.turn_event_ids, (turn_event_id) => {
       let tem = TurnEventModel.findOne(this.game._id, turn_event_id)
       // console.log("--tem--")
-      // console.log(tem)
-      let response = [tem.cards[0]]//TurnEventFutures[turn_event_id].get()
+      // console.log(tem.minimum)
+      // console.log(tem.maximum)
+      let response = [tem.cards[0], tem.cards[1]]//TurnEventFutures[turn_event_id].get()
       TurnEventModel.remove(this.game._id, turn_event_id)
       // delete TurnEventFutures[turn_event_id]
       result.push(event_action(this.game, this.player_cards, response, this.source))

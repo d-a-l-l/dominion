@@ -1,7 +1,6 @@
 CardPlayer = class CardPlayer {
 
-  constructor(game, player_cards, card, originating_card) {
-    this.game = game
+  constructor(player_cards, card, originating_card) {
     this.player_cards = player_cards
     this.card = card
     if (originating_card) {
